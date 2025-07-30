@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenidad - Centro de Masajes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-beige: #f5f5dc;
+            --color-olive: #6b8e23;
+            --color-dark: #333;
+            --color-light: #f8f8f8;
+            --color-brown: #8b4513;
+            --color-gray: #808080;
+            --color-white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-beige);
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--color-olive);
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            font-weight: 600;
+            color: var(--color-brown);
+        }
+        
+        /* Navigation Styles */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            position: relative;
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--color-olive);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--color-white);
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border-top: 3px solid var(--color-olive);
+        }
+        
+        .dropdown-content a {
+            color: var(--color-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--color-beige);
+            padding-left: 20px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            color: var(--color-olive);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--color-white);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--color-olive);
+            color: var(--color-white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 0;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: var(--color-brown);
+            transform: translateY(-3px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--color-brown);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 2px;
+            background-color: var(--color-olive);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Massage Types */
+        .massage-types {
+            background-color: var(--color-white);
+            padding: 80px 0;
+        }
+        
+        .massage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .massage-card {
+            background-color: var(--color-light);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .massage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .massage-card h3 {
+            color: var(--color-olive);
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+        
+        .massage-card p {
+            margin-bottom: 20px;
+            color: var(--color-gray);
+        }
+        
+        .massage-card .duration {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .duration span {
+            font-weight: 500;
+            color: var(--color-brown);
+        }
+        
+        /* About Section */
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--color-light);
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin: 30px 0;
+        }
+        
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--color-olive);
+font-size: 24px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-brown);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .massage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Serenidad<span>Masajes</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li class="dropdown">
+                            <a href="#masajes" class="dropbtn">Catálogo de Masajes</a>
+                            <div class="dropdown-content">
+                                <a href="#relajante">Masaje Relajante</a>
+                                <a href="#descontracturante">Masaje Descontracturante</a>
+                                <a href="#terapeutico">Masaje Terapéutico</a>
+                                <a href="#deportivo">Masaje Deportivo</a>
+                                <a href="#craneofacial">Masaje Craneofacial</a>
+                                <a href="#aromaterapia">Masaje con Aromaterapia</a>
+                                <a href="#facial">Masaje Facial</a>
+                                <a href="#reflexologia">Reflexología Podal</a>
+                            </div>
+                        </li>
+                        <li><a href="#sobre">Sobre Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Experiencias de Bienestar y Relajación</h1>
+            <p>Descubre una experiencia única de masajes diseñada para revitalizar cuerpo y mente. Un ambiente de paz y armonía para equilibrar las tensiones del día a día.</p>
+            <a href="#masajes" class="btn">Explorar Masajes</a>
+        </div>
+    </section>
+
+    <!-- Massage Types -->
+    <section class="massage-types" id="masajes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Masajes</h2>
+                <p>Selecciona el tratamiento perfecto para ti</p>
+            </div>
+            
+            <div class="massage-grid">
+                <!-- Massage Relajante -->
+                <div class="massage-card" id="relajante">
+                    <h3>Masaje Relajante</h3>
+                    <p>Déjate envolver por un suave masaje que alivia el estrés y la tensión acumulada, dejando tu cuerpo en un estado de completa relajación.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage Descontracturante -->
+<div class="massage-card" id="descontracturante">
+                    <h3>Masaje Descontracturante</h3>
+                    <p>Un tratamiento intensivo para liberar contracturas y tensiones profundas. Ideal para quienes buscan aliviar dolores musculares y mejorar la flexibilidad.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage Terapéutico -->
+                <div class="massage-card" id="terapeutico">
+                    <h3>Masaje Terapéutico</h3>
+                    <p>Diseñado para tratar afecciones específicas y mejorar la movilidad, aliviando el dolor y mejorando el bienestar general.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage Deportivo -->
+                <div class="massage-card" id="deportivo">
+                    <h3>Masaje Deportivo</h3>
+                    <p>Recuperación y prevención para deportistas. Alivia la fatiga muscular y mejora el rendimiento físico. Ideal después de la actividad física intensa.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage Craneofacial -->
+                <div class="massage-card" id="craneofacial">
+                    <h3>Masaje Craneofacial</h3>
+                    <p>Un tratamiento relajante para aliviar tensiones en la cabeza, cuello y cara, ideal para quienes sufren de dolores de cabeza, tensión ocular o estrés.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage con Aromaterapia -->
+                <div class="massage-card" id="aromaterapia">
+                    <h3>Masaje con Aromaterapia</h3>
+                    <p>El poder de los aceites esenciales combinado con un masaje relajante para equilibrar tus emociones y revitalizar cuerpo y mente.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                    <div class="duration">
+                        <span>60 min</span> <span>$5000</span>
+                    </div>
+                </div>
+                
+                <!-- Massage Facial -->
+                <div class="massage-card" id="facial">
+                    <h3>Masaje Facial</h3>
+                    <p>Un tratamiento rejuvenecedor que combina suaves maniobras de drenaje, tonificación y relajación para mejorar la circulación y revitalizar la piel.</p>
+<div class="duration">
+                        <span>15 min</span> <span>$1500</span>
+                    </div>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2500</span>
+                    </div>
+                </div>
+                
+                <!-- Reflexología Podal -->
+                <div class="massage-card" id="reflexologia">
+                    <h3>Reflexología Podal</h3>
+                    <p>A través de la estimulación de puntos reflejos en los pies, este tratamiento mejora el bienestar general y equilibra la energía del cuerpo.</p>
+                    <div class="duration">
+                        <span>30 min</span> <span>$2000</span>
+                    </div>
+                    <div class="duration">
+                        <span>45 min</span> <span>$3500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Experiencia</h2>
+            </div>
+            
+            <div class="about-content">
+                <p>Queremos ofrecerte una experiencia de relajación única, diseñada para revitalizar cuerpo y mente. Te invitamos a disfrutar de una completa gama de masajes y terapias adaptadas a tus necesidades, en un ambiente de paz y armonía.</p>
+                <p>Cada uno de nuestros tratamientos está pensado para proporcionarte un bienestar profundo, equilibrando las tensiones del día a día y potenciando tu salud física y emocional.</p>
+                <p>Todos los masajes son con reserva previa dependiendo de la disponibilidad de nuestro masajista.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Reserva tu Cita</h2>
+                <p>Estamos para atenderte</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p><i class="fas fa-phone-alt"></i> WhatsApp: +5363746735</p>
+                    <p>Contacta con nosotros para concertar fecha y hora</p>
+                </div>
+                
+                <a href="https://wa.me/5363746735" class="btn">Reservar por WhatsApp</a>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/sisoywaugh/profilecard/?igsh=MTRkcTVqc2F4MDJpZg==" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Serenidad Masajes. Todos los derechos reservados.</p>
+            <p>Diseñado con amor para tu bienestar</p>
+        </div>
+    </footer>
+</body>
+</html>
